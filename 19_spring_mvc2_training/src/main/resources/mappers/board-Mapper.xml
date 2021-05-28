@@ -5,6 +5,23 @@
 		
 <!-- namespace는 중복되지 않고 고유해야만 한다. -->
 <mapper namespace="com.spring.mapper.BoardMapper">
+
+	<select id="getOneBoard" parameterType="int" resultType="com.spring.board.dto.BoardDTO">
+		SELECT
+			*
+		FROM
+			BOARD
+		WHERE
+			NUM = #{num}
+	</select>
+	
+	<select id="getAllBoard" resultType="com.spring.board.dto.BoardDTO">
+		SELECT
+			*
+		FROM
+			BOARD
+		
+	</select>
 	
 	<insert id="insertBoard" parameterType="com.spring.board.dto.BoardDTO">
 		INSERT INTO BOARD (

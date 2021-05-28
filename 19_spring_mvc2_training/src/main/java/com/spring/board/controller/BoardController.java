@@ -1,7 +1,11 @@
 package com.spring.board.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.spring.board.dto.BoardDTO;
@@ -25,6 +29,25 @@ public class BoardController {
 	
 		boardService.insertBoard(bdto);
 		return "board/main";
+	}
+	
+	@RequestMapping(value="/boardList")
+	public String boardList(Model model) throws Exception{
+		
+		List<BoardDTO> boardList = boardService.getBoardList();
+		
+		//메소드의 매개변수에 Model 인터페이스를 선언하고 model.addAttribute(key, value) 형태로 데이터를 view로 전송한다.
+		model.addAttribute("boardList",boardList);
+		
+		return "board/bList";
+	}
+	
+	@RequestMapping(value="/boardInfo")
+	public String boardInfo(@RequestParam("num") int num, Model model) throws Exception{
+		
+		BoardDTO bdto = boardService.getOneBoard(num);
+		model.addAttribute("bdto", bdto);
+		return "board/bInfo";
 	}
 	
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BoardDTO {
 
-	private int number;
+	private int num;
 	private String writer;
 	private String email;
 	private String subject;
@@ -16,11 +16,11 @@ public class BoardDTO {
 	private int readCount;
 	private String content;
 	
-	public int getNumber() {
-		return number;
+	public int getNum() {
+		return num;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setNum(int number) {
+		this.num = number;
 	}
 	public String getWriter() {
 		return writer;

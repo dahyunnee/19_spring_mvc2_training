@@ -5,6 +5,14 @@
   
  
  <configuration>
- 	
+ 	<!--
+ 	 
+ 		Mybatis에서 resultMap 혹은 AS를 사용하지 않아도 
+ 		_형식의 DB 컬럼명과 camelcase의 자바 변수를 매치하여 준다.
+ 		
+ 	 -->
+ 	<settings>
+ 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+ 	</settings>
  	
  </configuration>
