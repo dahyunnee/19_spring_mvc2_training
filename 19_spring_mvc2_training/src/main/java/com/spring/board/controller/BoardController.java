@@ -38,7 +38,6 @@ public class BoardController {
 		
 		//메소드의 매개변수에 Model 인터페이스를 선언하고 model.addAttribute(key, value) 형태로 데이터를 view로 전송한다.
 		model.addAttribute("boardList",boardList);
-		
 		return "board/bList";
 	}
 	
@@ -49,5 +48,24 @@ public class BoardController {
 		model.addAttribute("bdto", bdto);
 		return "board/bInfo";
 	}
+	
+	@RequestMapping(value="/boardUpdate", method=RequestMethod.GET)
+	public String boardUpdate(@RequestParam("num") int num, Model model) throws Exception{
+		
+		BoardDTO bdto = boardService.getOneBoard(num);
+		model.addAttribute("bdto", bdto);
+		return "board/bUpdate";
+	}
+	
+	@RequestMapping(value="/boardUpdate", method=RequestMethod.POST)
+	public String boardUpdate(BoardDTO bdto, Model model) throws Exception{
+		
+		Boolean isSucceed = boardService.updateBoard(bdto);
+		if (isSucceed)	model.addAttribute("success", true);
+		else model.addAttribute("success",false);
+		
+		return "board/bUpdatePro";
+	}
+	
 	
 }

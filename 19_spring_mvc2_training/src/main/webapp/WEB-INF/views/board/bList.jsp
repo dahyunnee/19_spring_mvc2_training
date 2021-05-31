@@ -28,6 +28,9 @@
 				<td>${bdto.readCount }</td>
 			</tr>
 		</c:forEach>
+		<tr>
+			<td colspan="5"><input type="button" value="글쓰기" onclick="location.href='boardWrite'"></td>
+		</tr>
 	</table>
 </div>
 </body>
