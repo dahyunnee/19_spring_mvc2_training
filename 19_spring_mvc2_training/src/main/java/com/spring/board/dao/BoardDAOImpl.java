@@ -49,5 +49,10 @@ public class BoardDAOImpl implements BoardDAO{
 	public void increaseReadCount(int num) throws Exception {
 		sqlSession.update("com.spring.mapper.BoardMapper.increaseReadCount", num);
 	}
+
+	@Override
+	public void delete(int num) throws Exception {
+		sqlSession.delete("com.spring.mapper.BoardMapper.deleteBoard", num);
+	}
 	
 }

@@ -39,7 +39,7 @@
 		2-4) mybatis-spring 
 	
 	3. root-context.xml에 DB연결 설정
-	4. mybatis-config.xml 파일 및 매퍼 파일 생성
+	4. mybatis-config.xml 파일 및 매퍼 파일 생성 - mapUnderscoreToCamelCase 도 추가하기
 	5. DTO 생성
 	6. 매퍼에서 쿼리문 작성
 	7. DAO , DAOImple 생성

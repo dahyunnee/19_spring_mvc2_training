@@ -19,6 +19,11 @@ public class BoardController {
 	
 	//value : url 주소를 명시
 	//method : 요청 타입을 명시
+	@RequestMapping(value="/")
+	public String main() {
+		return "board/main";	//servlet-context.xml에 명시된 대로 포워딩할 jsp파일을 작성해준다.
+	}
+	
 	@RequestMapping(value="/boardWrite", method=RequestMethod.GET)
 	public String boardWrite() {
 		return "board/bWrite";	//servlet-context.xml에 명시된 대로 포워딩할 jsp파일을 작성해준다.
@@ -67,5 +72,23 @@ public class BoardController {
 		return "board/bUpdatePro";
 	}
 	
+	@RequestMapping(value="/boardDelete", method=RequestMethod.GET)
+	public String boardDelete(@RequestParam("num") int num, Model model) throws Exception{
+		
+		BoardDTO bdto = boardService.getOneBoard(num);
+		model.addAttribute("bdto",bdto);
+			
+		return "board/bDelete";
+	}
+	
+	@RequestMapping(value="/boardDelete", method=RequestMethod.POST)
+	public String boardDelete(BoardDTO bdto, Model model) throws Exception{	//num과 password만 존재하는 bdto
+		
+		Boolean isSucceed = boardService.deleteBoard(bdto);
+		if (isSucceed) model.addAttribute("success",true);
+		else model.addAttribute("success",false);
+			
+		return "board/bDeletePro";
+	}
 	
 }

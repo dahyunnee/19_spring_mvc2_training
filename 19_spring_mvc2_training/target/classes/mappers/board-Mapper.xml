@@ -5,6 +5,13 @@
 		
 <!-- namespace는 중복되지 않고 고유해야만 한다. -->
 <mapper namespace="com.spring.mapper.BoardMapper">
+
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM 
+			BOARD 
+		WHERE
+			NUM=#{num}
+	</delete>
 	
 	<update id="increaseReadCount" parameterType="int" >
 		UPDATE BOARD SET
