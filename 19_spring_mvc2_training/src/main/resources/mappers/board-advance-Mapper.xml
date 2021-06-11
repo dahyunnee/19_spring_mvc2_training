@@ -65,11 +65,13 @@
 						WHERE
 								SUBJECT LIKE CONCAT('%' , #{searchWord} , '%') OR
 								WRITER LIKE CONCAT('%' , #{searchWord} , '%')
+								<!--  like : 특정 문자열 포함 여부 검색 -->
 						ORDER BY
 								REF DESC,
 								RE_STEP  
 						LIMIT 
 								#{startBoardIdx},#{onePageViewCount}
+								<!--  startBoardIdx +1 행 ~ onePageViewCount 행까지 가져옴 -->
 					</otherwise>
 				</choose>
 			</when>
@@ -100,7 +102,8 @@
 				BOARD_ADVANCE 
 		VALUES (
 				(SELECT 
-					IFNULL(MAX(NUM) + 1 , 1)
+					IFNULL(MAX(NUM) + 1 , 1)  	<!-- board_advance 테이블에서 max(num) +1 값이 null일때, 즉 , 테이블이
+													비어 있으면 1 아니면 max(num)+1 의 컬럼값을 가져온다.  -->
 				FROM 
 					BOARD_ADVANCE AS B), 
 				#{writer}, 
@@ -140,6 +143,8 @@
 	</update>
 
 	<!-- 스탭을 옮려주는 쿼리 -->
+	<!-- 같은 re_level의 댓글 작성하는 경우  -->
+	<!-- 현재 base댓글 아래의 댓글들 re_step을 1씩 올려서 현재 base 댓글 re_step + 1의 값을 현재 insert해줄 댓글의 re_step값으로 쓰기위해  -->
 	<update id="updateBoardReplyStep">
 		<![CDATA[
 			UPDATE 
@@ -181,6 +186,7 @@
 	</update>
 	
 	<!-- 댓글을 등록하는 쿼리 -->
+	<!-- updateBoardReplyStep에서 re_step을 1씩 증가시켜줘서 현재 base댓글의 re_step+1을  value로 갖는 re_step은 없음 -->
 	<insert id="insertReplyBoard">
 		INSERT INTO 
 				BOARD_ADVANCE
